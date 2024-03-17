@@ -89,7 +89,7 @@
       @current-change="getList"
     />
   </el-row>
-  <el-dialog top="5vh" v-model="openDialogCreate" :width="calcularAnchoDialog('75%','90%')">
+  <!-- <el-dialog top="5vh" v-model="openDialogCreate" :width="calcularAnchoDialog('75%','90%')">
     <template #header>Nueva persona</template>
     <div style="height: 70vh; overflow-y: auto;">
       <create-user @close="handleCloseCreate"/>
@@ -100,17 +100,18 @@
     <div style="height: 70vh; overflow-y: auto;">
       <edit-user :id-user="idItemToEdit" @close="handleCloseEdit"/>
     </div>
-  </el-dialog>
+  </el-dialog> -->
 </template>
 
 <script setup>
 import UserRequest from '@/api/auth/usuario'
 import { ElMessageBox, ElNotification } from 'element-plus'
-import { calcularAnchoDialog, alturaPorDispositivo } from '@/utils/responsive'
+import {  alturaPorDispositivo } from '@/utils/responsive'
+// calcularAnchoDialog
 import { nextTick, onMounted, reactive, ref } from 'vue'
 // Componentes
-import CreateUser from './components/CreateUser.vue'
-import EditUser from './components/EditUser.vue'
+// import CreateUser from './components/CreateUser.vue'
+// import EditUser from './components/EditUser.vue'
 
 const userRequest = new UserRequest()
 
@@ -146,16 +147,16 @@ const getList = () => {
     })
 }
 
-const handleCloseCreate = (status) => {
-  if (status == 'success') getList()
-  openDialogCreate.value = false
-}
+// const handleCloseCreate = (status) => {
+//   if (status == 'success') getList()
+//   openDialogCreate.value = false
+// }
 
-const handleCloseEdit = (status) => {
-  if (status == 'success') getList()
-  openDialogEdit.value = false
-  idItemToEdit.value = ''
-}
+// const handleCloseEdit = (status) => {
+//   if (status == 'success') getList()
+//   openDialogEdit.value = false
+//   idItemToEdit.value = ''
+// }
 
 const handleCommand = ({ item, action }) => {
   if (action == 'EDIT') {

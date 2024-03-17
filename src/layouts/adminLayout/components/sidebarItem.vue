@@ -77,7 +77,12 @@ export default {
   },
   computed: {
     visibleChildren() {
-      return this.item.children.filter((item) => !item.hidden)
+      console.log(this.item.children)
+      console.log(this.item.hasOwnProperty('children'))
+      if(this.item.children != null) {
+        return this.item.children.filter((item) => !item.hidden)
+      }
+      return []
     }
   },
   methods: {

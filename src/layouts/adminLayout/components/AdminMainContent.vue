@@ -1,14 +1,6 @@
 <template>
   <div class="admin-main-container">
     <el-row>
-      <el-col :span="appStore.isPhone? 3:2" :xs="3" :sm="3" :md="2" :lg="1">
-        <v-icon
-          :name="appStore.sidebarActive?'hi-solid-menu':'io-close'"
-          style="color: var(--el-text-color-primary)"
-          scale="2"
-          @click="appStore.toggleSideBar()"
-        />
-      </el-col>
       <el-col :span="appStore.isPhone? 15:11" :xs="15" :sm="15" :md="11" :lg="11">
         <div style="display: flex; align-items: center">
           <v-icon v-if="PageInfo.icon" :name="PageInfo.icon" style="margin-right: 15px" scale="2" />

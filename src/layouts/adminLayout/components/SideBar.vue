@@ -1,41 +1,69 @@
 <template>
-  <div :class="{ 'sidebar-hidden': isCollapse }" class="sidebar-container">
+  <div class="sidebar-container">
     <div style="display: flex">
-      <div class="main-router py-2 px-2">
-        <div style="height: 50px; display: flex; justify-content: center; align-items: center;">
-          <img src="@/assets/img/sidebar_firs_logo.png" width="40"/>
+      <div class="main-routes">
+        <div style="height: 50px; display: flex; justify-content: center; align-items: center">
+          <img src="@/assets/img/sidebar_firs_logo.png" width="40" />
         </div>
-        <div style="display: flex; height: calc(100vh - 80px); flex-direction: column; align-items: center; justify-content: center;">
-          <div>
-            icono1
-          </div>
-          <div>
-            icono2
+        <div
+          style="
+            display: flex;
+            height: calc(100vh - 80px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            list-style: none;
+            color: #ffffff !important;
+          "
+        >
+          <div v-for="ruta in rutasBase" :key="ruta.name" class="my-2">
+            <div v-if="!ruta.meta.hidden">
+              <router-link :to="ruta.name" custom>
+                <el-tooltip
+                  class="tooltip"
+                  effect="dark"
+                  :content="ruta.meta.title"
+                  placement="right"
+                >
+                  <v-icon
+                    :name="ruta.meta.icon"
+                    scale="1.5"
+                    class="main-link"
+                    :class="{ mainactive: selectedMain.name == ruta.name }"
+                    @click="setSelectetMain(ruta)"
+                  />
+                </el-tooltip>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div class="sidebar-header">
-          <v-icon
-            id="icon-close"
-            :name="appStore.sidebarActive ? 'hi-solid-menu' : 'io-close'"
-            style="color: var(--el-bg-color-page); margin-left: 85%"
-            scale="2"
-            @click="appStore.toggleSideBar()"
-          />
-          <img class="sidebar-image" src="@/assets/img/admin-template.png" alt="Main Logo" />
+      <div class="children-routes" style="flex-grow: 1">
+        <div>
+          <img src="@/assets/img/admin-template.png" alt="Main Logo" />
         </div>
-        <div class="sidebar-body">
-          <el-scrollbar style="height: 80vh">
-            <el-menu default-active="/dashboard/index">
-              <sidebar-item
-                v-for="route in MenuItems"
-                :key="route.path"
-                :item="route"
-                :base-path="route.path"
-              />
-            </el-menu>
-          </el-scrollbar>
+        <div>
+          <h4>{{ selectedMain.meta.title }}</h4>
+        </div>
+        <div>
+          <!-- <sidebar-item v-for="route in selectedMain.children" :key="route.path" :item="route" :base-path="route.path"/> -->
+          <div v-for="child in selectedMain?.children" :key="child.name">
+            <!-- <div v-if="child.children != null && child.children?.length > 0">
+              <SidebarItem v-for="route in child.children"  :key="route.path" :item="route" :base-path="route.path" />
+            </div> -->
+            <div>
+              <router-link :to="child.path" custom v-slot="{ isActive, navigate }">
+                <div @click="navigate">
+                  <v-icon
+                    :name="child.meta.icon"
+                    class="childrenroute mx-2"
+                    :class="{ childrenactive: isActive }"
+                  />
+                  {{ child.meta.title }}
+                </div>
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -43,81 +71,87 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useAuthStore } from '@/stores/auth'
-import SidebarItem from './sidebarItem.vue'
-import { useAppStore } from '../../../stores/app'
+import { computed, ref } from 'vue'
 
-// const isCollapse = ref(true);
-const authStore = useAuthStore()
-const appStore = useAppStore()
-const MenuItems = computed(() => {
-  return authStore.userAccessRoutes || []
-})
-const isCollapse = computed(() => {
-  return appStore.sidebarActive
-})
+import { useRoute, useRouter } from 'vue-router'
+// import SidebarItem from './sidebarItem.vue'
+
+const router = useRouter()
+const route = useRoute()
+
+const rutasBase = computed(() => router.getRoutes().filter((r) => r.meta.main))
+const selectedMain = ref(route.matched[0])
+const setSelectetMain = (ruta) => {
+  selectedMain.value = ruta
+}
+// const rutasHijasyNietas = computed(() => { return router.children })
 </script>
 
-<style>
-.sb-icon-close {
-  display: none;
-}
+<style scoped>
 .sidebar-container {
-  width: 450px;
+  background-color: #506fe4;
+}
+.main-routes {
+  width: 60px;
   height: 100vh;
-  background-color: var(--template-color-primary);
-  transition: margin-left 0.3s ease;
-  overflow: hidden;
-  padding: 15px 0;
-  display: block;
-}
-
-.sidebar-hidden {
-  display: none;
-}
-
-.sidebar-header {
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #506fe4;
 }
-
-.sidebar-image {
-  padding: 25px;
-  max-height: 300px;
-}
-
-.sidebar-body {
-  padding: 10px 0;
-}
-
-#icon-close {
-  display: none;
-}
-.main-router {
-  width: 80px;
+.children-routes {
+  width: 220px;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  padding: 10px;
+  background-color: #ffffff;
 }
 
-/* Media query para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
+.main-link {
+  color: #989ba0;
+}
+
+.main-link:focus {
+  outline: none;
+}
+.main-link:active {
+  outline: none;
+}
+.main-link:focus-visible {
+  outline: none;
+}
+
+.tooltip:active {
+  background-color: #384d9f;
+}
+.mainactive:focus {
+  outline: none;
+}
+.mainactive:focus-visible {
+  outline: none;
+}
+.mainactive:active {
+  outline: none;
+}
+.mainactive {
+  color: #ffffff;
+  background-color: #384d9f;
+  /* padding: 7px; */
+  /* background-color: ; */
+}
+
+.childrenroute {
+  color: #989ba0;
+}
+.childrenroute:hover {
+  color: #506fe4;
+}
+.childrenactive {
+  color: #506fe4;
+}
+/* 
 @media screen and (max-width: 600px) {
-  .sidebar-container {
-    position: absolute;
-    z-index: 9999;
-    display: block;
-    width: 80vw; /* Ancho para dispositivos móviles */
-    transform: translateX(0);
-    transition: transform 0.4s ease;
-  }
-
-  .sidebar-hidden {
-    margin-left: -70vw; /* Oculta el sidebar hacia la izquierda en dispositivos móviles */
-    transform: translateX(-100%);
-  }
-  #icon-close {
-    display: block;
-  }
-}
+  
+} */
 </style>

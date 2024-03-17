@@ -1,7 +1,5 @@
 @import './base.css';
-@import './custom-element.css';
 @import './spaces.css';
-@import './custom.css';
 
 * {
   margin: 0;
@@ -17,7 +15,6 @@
 a,
 .green {
   text-decoration: none;
-  color: #00bd7e;
   transition: 0.4s;
 }
 
@@ -28,11 +25,7 @@ a,
   z-index: 9999 !important; /* Asegúrate de que este valor sea mayor que el z-index de cualquier modal o diálogo */
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: #00bd7e33;
-  }
-}
+
 
 @media (min-width: 1024px) {
   body {

@@ -10,9 +10,10 @@ export const routes =  [
   {
     path: '/',
     redirect: '/signin',
-    hidden: true,
     meta: {
+      hidden: true,
       title: 'Enlaces Publicos',
+      icon: 'md-spacedashboard'
     },
     children: [
       {                     
@@ -28,14 +29,15 @@ export const routes =  [
     path: "/dashboard",
     component: AdminLayout,
     name: 'Dashboard',
-    redirect: '/dashboard/index',
+    redirect: '/dashboard/home',
     meta: {
+      main:true,
       title: 'Panel',
       icon: 'md-spacedashboard'
     },
     children: [
       {
-        path: 'index',
+        path: '/home',
         component: () => import('@/views/dashboard/dashboardView.vue'),
         name: 'Panel',
         meta: {title: 'Panel de control', icon: 'md-spacedashboard'}
