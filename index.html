@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/icon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CERSA</title>
+    <style>
+      .loader {
+        display: block;
+        --height-of-loader: 4px;
+        --loader-color: #0071e2;
+        width: 130px;
+        height: var(--height-of-loader);
+        border-radius: 30px;
+        background-color: rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 99999;
+      }
+
+      .loader::before {
+        content: '';
+        position: absolute;
+        background: var(--loader-color);
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        border-radius: 30px;
+        animation: moving 1s ease-in-out infinite;
+      }
+
+      @keyframes moving {
+        50% {
+          width: 100%;
+        }
+
+        100% {
+          width: 0;
+          right: 0;
+          left: unset;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="page-loader"
+      style="
+        position: fixed;
+        inset: 0;
+        background: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="loader">
+      </div>
+    </div>
+    <div id="app">
+    </div>
+    <script type="module" src="/src/main.js"></script>
+    <!-- <script type="text/javascript" src="https://apis.google.com/js/api.js"></script> -->
+    <!-- <script async defer src="https://apis.google.com/js/api.js" onload="onApiLoad()"></script> -->
+    <!-- <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script> -->
+  </body>
+</html>

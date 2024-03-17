@@ -1,0 +1,38 @@
+{
+  "name": "template-admin-front",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "hdev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@formkit/tempo": "^0.0.13",
+    "@jbtje/vite-vue3pdf": "^0.2.0",
+    "@pdf-lib/fontkit": "^1.1.1",
+    "@vueuse/core": "^10.5.0",
+    "axios": "^1.6.0",
+    "element-plus": "^2.4.2",
+    "oh-vue-icons": "^1.0.0-rc3",
+    "pinia": "^2.1.7",
+    "pusher-js": "^8.4.0-rc2",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.3.3",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "prettier": "^3.0.3",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "vite": "^4.4.11",
+    "vite-plugin-compression": "^0.5.1"
+  }
+}
