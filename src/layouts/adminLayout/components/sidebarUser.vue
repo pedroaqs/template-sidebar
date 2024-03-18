@@ -4,7 +4,7 @@
       <div id="useremail" style="overflow: hidden; margin-right: 12px">
         <h3>{{ UserEmail }}</h3>
       </div>
-      <el-avatar :size="40" style="overflow: hidden; margin-right: 12px">
+      <el-avatar :size="30" style="overflow: hidden; margin-right: 12px">
         <img src="@/assets/avatar/avatar0.svg" alt="User Avatar" />
       </el-avatar>
       <el-dropdown trigger="click">
@@ -21,13 +21,6 @@
                 Perfil
               </span>
             </el-dropdown-item>
-            <!-- <el-dropdown-item @click="toggleDark">
-            <span>
-              <v-icon v-if="isDark" name="ri-moon-line" style="margin-right: 10px;"/>
-              <v-icon v-else name="pr-sun" style="margin-right: 10px;"/>
-              Cambiar tema
-            </span>
-          </el-dropdown-item> -->
             <el-dropdown-item divided @click="openDialog">
               <span>
                 <v-icon

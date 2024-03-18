@@ -1,21 +1,13 @@
 <template>
   <div class="admin-main-container">
-    <el-row>
-      <el-col :span="appStore.isPhone? 15:11" :xs="15" :sm="15" :md="11" :lg="11">
-        <div style="display: flex; align-items: center">
-          <v-icon v-if="PageInfo.icon" :name="PageInfo.icon" style="margin-right: 15px" scale="2" />
-          <h4 v-if="appStore.isPhone">{{ PageInfo.title || 'CERSA' }}</h4>
-          <h2 v-else>{{ PageInfo.title || 'CERSA' }}</h2>
-        </div>
-      </el-col>
-      <el-col :span="appStore.isPhone?6:11" :xs="6" :sm="6" :md="11" :lg="12">
-        <sidebar-user />
-      </el-col>
-    </el-row>
-    <el-divider />
-    <el-card style="height: calc(100vh -130px)">
-      <RouterView />
-    </el-card>
+    <div style="height: 60px; background-color: #ffffff; display: flex; align-items: center; justify-content: end;">
+      <SidebarUser />
+    </div>
+    <div class="px-2" style="">
+      <el-scrollbar style="height: calc(100vh - 80px); background-color: f2f3f7;">
+        <router-view />
+      </el-scrollbar>
+    </div>
   </div>
 </template>
 
@@ -38,7 +30,6 @@ const PageInfo = computed(() => {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  padding: 20px;
   color: var(--el-text-color-primary);
   transition: margin-left 0.3s ease; /* Agrega una transición para el deslizamiento */
 }

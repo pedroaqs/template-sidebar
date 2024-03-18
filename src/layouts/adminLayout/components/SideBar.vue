@@ -39,27 +39,24 @@
         </div>
       </div>
       <div class="children-routes" style="flex-grow: 1">
-        <div>
-          <img src="@/assets/img/admin-template.png" alt="Main Logo" />
+        <div style="display: flex; justify-content: center; align-items: center;" class="my-2 mx-2">
+          <img src="@/assets/img/admin-template-main.png" width="200" alt="Main Logo" />
+        </div>
+        <div class="my-3">
+          <span style="font-size: 17; font-weight: bold; color: #506fe4;">{{ selectedMain.meta.title }}</span>
         </div>
         <div>
-          <h4>{{ selectedMain.meta.title }}</h4>
-        </div>
-        <div>
-          <!-- <sidebar-item v-for="route in selectedMain.children" :key="route.path" :item="route" :base-path="route.path"/> -->
-          <div v-for="child in selectedMain?.children" :key="child.name">
-            <!-- <div v-if="child.children != null && child.children?.length > 0">
-              <SidebarItem v-for="route in child.children"  :key="route.path" :item="route" :base-path="route.path" />
-            </div> -->
+          <div v-for="child in selectedMain?.children" :key="child.name" class="my-2">
             <div>
               <router-link :to="child.path" custom v-slot="{ isActive, navigate }">
                 <div @click="navigate">
-                  <v-icon
-                    :name="child.meta.icon"
-                    class="childrenroute mx-2"
-                    :class="{ childrenactive: isActive }"
-                  />
-                  {{ child.meta.title }}
+                  <span class="childrenroute my-2" :class="{ childrenactive: isActive }">
+                    <v-icon
+                      :name="child.meta.icon"
+                      
+                    />
+                    {{ child.meta.title }}
+                  </span>
                 </div>
               </router-link>
             </div>
@@ -109,7 +106,7 @@ const setSelectetMain = (ruta) => {
 }
 
 .main-link {
-  color: #989ba0;
+  color: #73767a;
 }
 
 .main-link:focus {
@@ -142,7 +139,7 @@ const setSelectetMain = (ruta) => {
 }
 
 .childrenroute {
-  color: #989ba0;
+  color: #73767a;
 }
 .childrenroute:hover {
   color: #506fe4;
